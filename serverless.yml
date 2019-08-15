@@ -13,13 +13,13 @@ provider:
   stage: ${opt:stage, 'dev'}      # Which stage to deploy to
   runtime: python3.6              # Which Lambda runtime to use
   logRetentionInDays: 30          # How many days we want to maintain logs in CloudWatch
-  region: 'eu-west-1'             # Which AWS region to deploy in, eu-west-1 by default, but overridable
+  region: 'us-west-2'             # Which AWS region to deploy in, eu-west-1 by default, but overridable
   memorySize: 128                 # In megabytes, 128 minimum in 64MB increments
   timeout: 300                    # In seconds
   versionFunctions:  true         # We want to version our functions so we can revert if we need to
   cfLogs: true                    # This allows us to customize our expiration time of our CloudWatch Log Buckets
   environment:
-    DEFAULT_RETENTION_TIME: "7"                  # This is the number of days by default to store AMIs for
+    DEFAULT_RETENTION_TIME: "2"                  # This is the number of days by default to store AMIs for
     LIMIT_TO_REGIONS: ""                         # Use this to limit what region(s) you'd like this lambda to scan.  Comma-delimited, by default scan all regions.  Put in eg: "eu-west-1" here
     DRY_RUN: "false"                             # If this env variable is set to true it will only print what it would do, not actually do it
     KEY_TO_TAG_ON: "AWSAutomatedDailySnapshots"  # This is the key we will scan for to detect if this script is managing a snapshot, by default this is "AWSAutomatedDailySnapshots".  Warning: the first version of this plugin had this value at: FarleysBackupInstanceRotater but it has since changed.  Please go manually delete any AMIs with the old name
